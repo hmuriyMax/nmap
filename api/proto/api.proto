@@ -1,5 +1,5 @@
 syntax = "proto3";
-package netvuln.v1;
+package netvuln;
 
 
 service NetVulnService {
@@ -28,6 +28,8 @@ message Service {
 }
 
 message Vulnerability{
-string identifier = 1;
-float cvss_score = 2;
+  string identifier = 1;
+  float cvss_score = 2;
 }
+
+option go_package = "nmap_api/;nmap_api";
