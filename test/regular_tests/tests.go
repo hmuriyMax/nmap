@@ -3,13 +3,20 @@ package main
 import (
 	"context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"nmap/pkg/nmap_api"
+	"os"
 )
 
 func main() {
+	address := ":6000"
+	if len(os.Args) > 1 {
+		address = os.Args[1]
+	}
+
 	//Connecting to GRPC server
-	dial, err := grpc.Dial(":6000", grpc.WithInsecure())
+	dial, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Could not connect to server: %s", err)
 		return
@@ -19,6 +26,7 @@ func main() {
 	c := nmap_api.NewNetVulnServiceClient(dial)
 
 	req, err := getReqFromFile("test.csv")
+	//TODO: automatically test many files. Replace .csv with?
 	if err != nil {
 		log.Fatalf("Could not parse .csv file: %s", err)
 		return
@@ -32,4 +40,5 @@ func main() {
 
 	//Printing results
 	printResults(vuln)
+	//TODO: count time for tests
 }

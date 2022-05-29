@@ -9,6 +9,8 @@ import (
 	"strconv"
 )
 
+var _LOGLEVEL_ int
+
 type GRPCServer struct{}
 
 //Searching for the "vulners" script in all scripts
@@ -18,7 +20,7 @@ func getVulnScript(port *nmap.Port) (bool, *nmap.Script) {
 			return true, &scr
 		}
 	}
-	log.Printf("Script not found")
+	UnimpLog("Script not found")
 	return false, &nmap.Script{}
 }
 
@@ -29,7 +31,7 @@ func getByKey(table []nmap.Element, key string) string {
 			return el.Value
 		}
 	}
-	log.Printf("Nothing found by key %s", key)
+	UnimpLog("Nothing found by key %s", key)
 	return ""
 }
 
@@ -76,7 +78,7 @@ func genResponseFromRun(run *nmap.Run) (*api.CheckVulnResponse, error) {
 					nvuln.Identifier = getByKey(vuln.Elements, "id")
 					float, err := strconv.ParseFloat(getByKey(vuln.Elements, "cvss"), 10)
 					if err != nil {
-						log.Printf("Formatting error: %s", err)
+						UnimpLog("Formatting error: %s", err)
 					} else {
 						nvuln.CvssScore = float32(float)
 					}
@@ -98,9 +100,9 @@ func (s *GRPCServer) CheckVuln(_ context.Context, req *api.CheckVulnRequest) (*a
 		return nil, err
 	}
 
-	log.Printf("Scan begun")
+	UnimpLog("Scan begun")
 	run, wrns, err := scanner.Run()
-	log.Printf("Scan finished")
+	UnimpLog("Scan finished")
 	if err != nil {
 		log.Fatalf("Running error: %s", err)
 		return nil, err
@@ -109,12 +111,20 @@ func (s *GRPCServer) CheckVuln(_ context.Context, req *api.CheckVulnRequest) (*a
 		fmt.Printf("Warning %d:  %s\n", i+1, el)
 	}
 
-	log.Printf("Started parsing results")
+	UnimpLog("Started parsing results")
 	res, err := genResponseFromRun(run)
 	if err != nil {
-		log.Printf("Parsing error: %s", err)
+		UnimpLog("Parsing error: %s", err)
 		return nil, err
 	}
-	log.Printf("Finished parsing results")
+	UnimpLog("Finished parsing results")
 	return res, nil
 }
+
+func UnimpLog(format string, v ...any) {
+	if _LOGLEVEL_ > 0 {
+		log.Printf(format, v...)
+	}
+}
+
+//TODO: more logging levels
