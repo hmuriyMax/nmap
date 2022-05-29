@@ -5,7 +5,7 @@ build:
 	go mod tidy
 
 tester:
-	go build ./test/test1.go
-	./test1
-	rm test1
+	go build ./test/regular_tests
+	./regular_tests
+	rm regular_tests
 	go mod tidy
