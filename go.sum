@@ -1,8 +1,6 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/Ullaakut/nmap v2.0.2+incompatible h1:edw45QpSQBQ2B/Hqfg86Bt5rrK79tp/fAcqIHyNSdQs=
-github.com/Ullaakut/nmap v2.0.2+incompatible/go.mod h1:fkC066hwfcoKwlI7DS2ARTggSVtBTZYCjVH1TzuTMaQ=
 github.com/Ullaakut/nmap/v2 v2.2.0 h1:68djp0dvUgAcsUx3gxmOI573GSAmPhHYkWvdgFdl4F8=
 github.com/Ullaakut/nmap/v2 v2.2.0/go.mod h1:/6YyiW1Rgn7J6DAWCgL4CZZf6zJCFhB07PQzvjFfzLI=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=

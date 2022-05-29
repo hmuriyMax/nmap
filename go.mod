@@ -3,7 +3,6 @@ module nmap
 go 1.18
 
 require (
-	github.com/Ullaakut/nmap v2.0.2+incompatible
 	github.com/Ullaakut/nmap/v2 v2.2.0
 	google.golang.org/grpc v1.46.2
 	google.golang.org/protobuf v1.28.0
