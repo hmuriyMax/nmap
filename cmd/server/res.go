@@ -20,7 +20,7 @@ func getVulnScript(port *nmap.Port) (bool, *nmap.Script) {
 			return true, &scr
 		}
 	}
-	UnimpLog("Script not found")
+	UnimpLog("Script not found or returned nothing")
 	return false, &nmap.Script{}
 }
 
